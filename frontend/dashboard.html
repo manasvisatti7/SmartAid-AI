@@ -1,29 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
+<title>SmartAid Dashboard</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  padding: 40px;
+  background: #f5f5f5;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  display: inline-block;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+input {
+  margin: 10px;
+  padding: 10px;
+  width: 250px;
+}
+
+button {
+  padding: 10px 25px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 18px;
+}
+</style>
+
 </head>
 
-<body style="font-family: Arial; text-align:center; padding:50px;">
+<body>
 
-<h1>SmartAid Dashboard</h1>
+<div class="card">
+  <h1>SmartAid Dashboard</h1>
 
-<h2>Request Help</h2>
+  <h3>Request Help</h3>
 
-<form id="helpForm">
-  <input type="text" placeholder="Your Name" required><br><br>
-  <input type="text" placeholder="Location" required><br><br>
-  <input type="text" placeholder="Type of Help" required><br><br>
-  <button type="submit">Submit</button>
-</form>
+  <form id="helpForm">
+    <input id="name" type="text" placeholder="Your Name" required><br>
+    <input id="location" type="text" placeholder="Location" required><br>
+    <input id="type" type="text" placeholder="Type of Help (medical/food/shelter)" required><br>
+    <button type="submit">Submit</button>
+  </form>
 
-<div id="output"></div>
+  <div id="output" class="result"></div>
+</div>
 
 <script>
 document.getElementById("helpForm").addEventListener("submit", function(e){
   e.preventDefault();
-  document.getElementById("output").innerHTML =
-    "<p style='color:green;'>Request Submitted ✅</p>";
+
+  let type = document.getElementById("type").value.toLowerCase();
+  let priority = "";
+
+  // 🔥 FAKE AI LOGIC
+  if(type.includes("medical") || type.includes("emergency")){
+    priority = "🔴 HIGH PRIORITY - Immediate help required!";
+  }
+  else if(type.includes("food") || type.includes("water")){
+    priority = "🟡 MEDIUM PRIORITY - Help will be arranged soon.";
+  }
+  else{
+    priority = "🟢 LOW PRIORITY - Added to queue.";
+  }
+
+  document.getElementById("output").innerHTML = `
+    <p><b>Request Received ✅</b></p>
+    <p>${priority}</p>
+  `;
 });
 </script>
 
