@@ -1,187 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SmartAid Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+<title>Dashboard</title>
 </head>
 
-<body>
+<body style="font-family: Arial; text-align:center; padding:50px;">
 
-<h1 class="title">SmartAid AI Dashboard</h1>
+<h1>SmartAid Dashboard</h1>
 
-<!-- 🔥 STATS -->
-<div class="stats">
-    <div class="stat-card">
-        <h3 id="needCount">0</h3>
-        <p>Needs</p>
-    </div>
+<h2>Request Help</h2>
 
-    <div class="stat-card">
-        <h3 id="volCount">0</h3>
-        <p>Volunteers</p>
-    </div>
+<form id="helpForm">
+  <input type="text" placeholder="Your Name" required><br><br>
+  <input type="text" placeholder="Location" required><br><br>
+  <input type="text" placeholder="Type of Help" required><br><br>
+  <button type="submit">Submit</button>
+</form>
 
-    <div class="stat-card">
-        <h3 id="matchCount">0</h3>
-        <p>Matches</p>
-    </div>
-</div>
-
-<div class="container">
-
-    <!-- ADD NEED -->
-    <div class="card">
-        <h2>Add Need</h2>
-
-        <input id="needTitle" placeholder="Title">
-        <input id="needLocation" placeholder="Location">
-        <input id="needSkill" placeholder="Skill">
-
-        <select id="needPriority">
-            <option value="low">Low Priority</option>
-            <option value="medium">Medium Priority</option>
-            <option value="high">High Priority</option>
-        </select>
-
-        <button onclick="addNeed()">Add Need</button>
-
-        <h3>Needs</h3>
-        <ul id="needsList"></ul>
-    </div>
-
-    <!-- ADD VOLUNTEER -->
-    <div class="card">
-        <h2>Add Volunteer</h2>
-
-        <input id="volName" placeholder="Name">
-        <input id="volLocation" placeholder="Location">
-        <input id="volSkill" placeholder="Skill">
-
-        <select id="volAvailability">
-            <option value="yes">Available</option>
-            <option value="no">Not Available</option>
-        </select>
-
-        <button onclick="addVolunteer()">Add Volunteer</button>
-    </div>
-
-    <!-- MATCH -->
-    <div class="card">
-        <h2>Smart Matching</h2>
-
-        <button onclick="findMatches()">Find Matches</button>
-
-        <div id="results"></div>
-    </div>
-
-</div>
+<div id="output"></div>
 
 <script>
-
-const API = "http://127.0.0.1:8000";
-
-let needsList = [];
-let volunteerCount = 0;
-let matchCount = 0;
-
-// UPDATE STATS
-function updateStats() {
-    document.getElementById("needCount").innerText = needsList.length;
-    document.getElementById("volCount").innerText = volunteerCount;
-    document.getElementById("matchCount").innerText = matchCount;
-}
-
-// ADD NEED
-async function addNeed() {
-    const title = document.getElementById("needTitle").value;
-    const location = document.getElementById("needLocation").value;
-    const skill = document.getElementById("needSkill").value;
-    const priority = document.getElementById("needPriority").value;
-
-    await fetch(`${API}/add_need`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({title, location, skill, priority})
-    });
-
-    needsList.push(title + " (" + priority + ")");
-    renderNeeds();
-    updateStats();
-}
-
-// SHOW NEEDS
-function renderNeeds() {
-    const list = document.getElementById("needsList");
-    list.innerHTML = "";
-
-    needsList.forEach(n => {
-        const li = document.createElement("li");
-        li.innerText = n;
-        list.appendChild(li);
-    });
-}
-
-// ADD VOLUNTEER
-async function addVolunteer() {
-    const name = document.getElementById("volName").value;
-    const location = document.getElementById("volLocation").value;
-    const skill = document.getElementById("volSkill").value;
-    const availability = document.getElementById("volAvailability").value;
-
-    await fetch(`${API}/add_volunteer`, {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({name, location, skill, availability})
-    });
-
-    volunteerCount++;
-    updateStats();
-}
-
-// MATCH
-async function findMatches() {
-    const res = await fetch(`${API}/match`);
-    const data = await res.json();
-
-    const resultDiv = document.getElementById("results");
-    resultDiv.innerHTML = "";
-
-    matchCount = data.length;
-    updateStats();
-
-    data.forEach(item => {
-
-        let color = "green";
-
-        if (item.priority === "high") color = "red";
-        else if (item.priority === "medium") color = "orange";
-
-        const explanation = `
-Matched because:
-✔ Location matched
-✔ Skill matched
-✔ Priority is ${item.priority}
-✔ Volunteer is ${item.availability}
-        `;
-
-        const div = document.createElement("div");
-
-        div.className = "result-card";
-        div.style.borderLeft = `6px solid ${color}`;
-
-        div.innerHTML = `
-            <b>${item.need}</b> 
-            <span style="color:${color}">(${item.priority})</span><br>
-            Volunteer: ${item.volunteer}<br>
-            Availability: ${item.availability}<br>
-            Score: ${item.score}<br><br>
-            <small>${explanation}</small>
-        `;
-
-        resultDiv.appendChild(div);
-    });
-}
-
+document.getElementById("helpForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  document.getElementById("output").innerHTML =
+    "<p style='color:green;'>Request Submitted ✅</p>";
+});
 </script>
 
 </body>
