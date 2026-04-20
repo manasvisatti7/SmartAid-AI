@@ -21,3 +21,250 @@ function goToApp() {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SmartAid AI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+}
+
+/* 🌈 Stronger animated background */
+.home {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(270deg, #c8e6c9, #a5d6a7, #81c784, #66bb6a);
+    background-size: 600% 600%;
+    animation: gradientMove 8s ease infinite;
+    position: relative;
+}
+
+@keyframes gradientMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* ✨ Floating glow circles */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    filter: blur(10px);
+    animation: float 5s infinite ease-in-out;
+}
+
+.circle:nth-child(1) {
+    width: 150px; height: 150px;
+    top: 10%; left: 10%;
+}
+
+.circle:nth-child(2) {
+    width: 100px; height: 100px;
+    bottom: 10%; right: 10%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-25px); }
+}
+
+/* 🧊 Main card */
+.content {
+    background: rgba(255,255,255,0.8);
+    padding: 60px 100px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+    z-index: 2;
+}
+
+/* ✨ Heading animation */
+h1 {
+    font-size: 55px;
+    color: #2e7d32;
+    animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+p {
+    font-size: 18px;
+    color: #444;
+    margin: 20px 0;
+}
+
+/* 🔥 Glowing button */
+button {
+    padding: 14px 40px;
+    border-radius: 50px;
+    border: none;
+    background: #2e7d32;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(46,125,50,0.5);
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(46,125,50,0.8);
+}
+
+/* 🚑 Bigger ambulance */
+.ambulance {
+    position: absolute;
+    bottom: 80px;
+    left: -200px;
+    width: 160px;
+    height: 80px;
+    background: white;
+    border-radius: 20px;
+    border: 3px solid #333;
+    animation: drive 10s linear infinite;
+}
+
+.ambulance::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    height: 12px;
+    background: #e53935;
+}
+
+.ambulance::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    width: 40px;
+    height: 20px;
+    background: #bbdefb;
+    border-radius: 5px;
+}
+
+/* wheels */
+.wheel {
+    position: absolute;
+    bottom: -12px;
+    width: 24px;
+    height: 24px;
+    background: #222;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.wheel1 { left: 25px; }
+.wheel2 { right: 25px; }
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes drive {
+    0% { left: -200px; }
+    100% { left: 110%; }
+}
+
+/* 🔥 Feature cards */
+.features {
+    display: flex;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.card {
+    background: rgba(255,255,255,0.7);
+    padding: 25px;
+    border-radius: 20px;
+    width: 220px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-12px) scale(1.05);
+}
+
+.card h3 {
+    color: #2e7d32;
+}
+
+.card p {
+    font-size: 14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="home">
+
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <div class="content">
+        <h1>SmartAid AI</h1>
+        <p>Connecting People in Need with the Right Help — Instantly</p>
+        <button onclick="go()">Get Started</button>
+    </div>
+
+    <div class="features">
+        <div class="card">
+            <h3>Smart Matching</h3>
+            <p>AI finds best volunteers instantly</p>
+        </div>
+        <div class="card">
+            <h3>Location Aware</h3>
+            <p>Nearby help prioritized</p>
+        </div>
+        <div class="card">
+            <h3>Priority Based</h3>
+            <p>Urgent needs handled first</p>
+        </div>
+    </div>
+
+    <div class="ambulance">
+        <div class="wheel wheel1"></div>
+        <div class="wheel wheel2"></div>
+    </div>
+
+    <div class="road"></div>
+
+<div class="ambulance">
+    <div class="wheel wheel1"></div>
+    <div class="wheel wheel2"></div>
+</div>
+
+
+</div>
+
+<script>
+function go() {
+    window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>
