@@ -1,0 +1,219 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================= HOME PAGE ================= */
+
+.home-body {
+    font-family: 'Poppins', cursive;
+    background: linear-gradient(-45deg, #1b5e20, #2e7d32, #4caf50, #81c784);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* GRADIENT ANIMATION */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* FLOATING BLOBS */
+.blob, .blob2 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: float 10s infinite alternate;
+    z-index: 0;
+}
+
+.blob {
+    top: 10%;
+    left: 10%;
+}
+
+.blob2 {
+    bottom: 10%;
+    right: 10%;
+}
+
+@keyframes float {
+    from { transform: translateY(0px); }
+    to { transform: translateY(50px); }
+}
+
+/* HERO */
+.hero {
+    position: relative;
+    z-index: 1;
+    padding: 120px 20px;
+    animation: fadeIn 1.5s ease;
+}
+
+.hero h1 {
+    font-size: 60px;
+    letter-spacing: 2px;
+}
+
+.tagline {
+    font-size: 22px;
+    margin: 20px 0;
+    opacity: 0.9;
+}
+
+/* FADE */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* JELLY BUTTON + PULSE */
+.hero button {
+    padding: 14px 30px;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    background: white;
+    color: #2e7d32;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+    transition: 0.3s;
+}
+
+.hero button:hover {
+    transform: scale(1.1);
+}
+
+.hero button:active {
+    transform: scale(0.9);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
+    70% { box-shadow: 0 0 0 20px rgba(255,255,255,0); }
+    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+/* FEATURES */
+.features {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px;
+}
+
+/* GLASS CARDS */
+.feature {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 20px;
+    width: 220px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.feature:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+/* ================= DASHBOARD ================= */
+
+body {
+    font-family: "Times New Roman", serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+h1 {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 120px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+}
+
+.card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    transform: scale(1.08);
+}
+
+button:active {
+    transform: scale(0.92);
+}
+
+.result-card {
+    background: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-left: 5px solid red;
+    border-radius: 10px;
+}
